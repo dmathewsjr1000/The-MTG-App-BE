@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { profileSchema } from './Profile.js';
+
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -10,24 +10,42 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
-        minLength: 8,
-        maxLength: 20
+        minLength: 8
+    },
+    cpassword: {
+        type: String,
+        minLength: 8
     },
     email: {
         type: String,
         required: true,
-        minLength: 6,
-        maxLength: 60
+        minLength: 6
     },
     dob: {
         type: Date,
         required: true,
     },
-    bioText: profileSchema,
-    followers: profileSchema,
-    following: profileSchema
-});
+    bioText: {
+        type: String,
+      },
+    followers: {
+        type: Number,
+        default: 0
+      },
+    following: {
+        type: Number,
+         default: 0
+      },
+    decks: {
+        deck: {
+            deckname: {
+                maindeck: [],
+                sidedeck: []
+            },
+        },
+    },
+    
+},{ timestamps: true },);
 
 userSchema.index({username: 1});
 
